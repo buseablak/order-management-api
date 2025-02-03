@@ -26,7 +26,7 @@ class TwentyPercentDiscountService implements DiscountInterface
 
                 $result[] = [
                     'discountReason' => 'CHEAPEST_20_PERCENT_OFF',
-                    'discountAmount' => $discountAmount,
+                    'discountAmount' => round($discountAmount,2),
                     'subtotal' => floatval($cheapestItem->total)
                 ];
             }

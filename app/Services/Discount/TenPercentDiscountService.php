@@ -18,7 +18,7 @@ class TenPercentDiscountService implements DiscountInterface
             if ($order->total_price >= 1000) {
                 $result[] = [
                     'discountReason' => '10_PERCENT_OVER_1000',
-                    'discountAmount' => $order->total_price * 0.10,
+                    'discountAmount' => round(($order->total_price * 0.10),2),
                     'subtotal' => floatval($order->total_price)
                 ];
             }
