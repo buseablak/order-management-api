@@ -1,0 +1,32 @@
+[
+    {
+        "customerId":2,
+        "items": [
+            {
+                "productId": 1,
+                "quantity": 4
+            },
+              {
+                "productId": 4,
+                "quantity": 6
+            },
+             {
+                "productId": 3,
+                "quantity": 6
+            }
+        ]
+    }, 
+    {
+        "customerId":3,
+        "items": [
+            {
+                "productId": 1,
+                "quantity": 4
+            },
+              {
+                "productId": 4,
+                "quantity": 6
+            }
+        ]
+    }
+]
