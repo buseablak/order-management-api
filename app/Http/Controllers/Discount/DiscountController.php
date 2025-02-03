@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Discount;
 
-use App\Services\DiscountService;
+use App\Http\Controllers\Controller;
+use App\Services\Discount\DiscountService;
 use Illuminate\Support\Facades\Log;
 
 class DiscountController extends Controller

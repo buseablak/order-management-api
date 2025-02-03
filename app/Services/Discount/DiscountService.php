@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Discount;
 
-use App\Services\Buy5Get1FreeService;
-use App\Services\TenPercentDiscountService;
-use App\Services\TwentyPercentDiscountService;
+use App\Services\Discount\Buy5Get1FreeService;
+use App\Services\Discount\TenPercentDiscountService;
+use App\Services\Discount\TwentyPercentDiscountService;
 use Illuminate\Support\Facades\Log;
 
 class DiscountService

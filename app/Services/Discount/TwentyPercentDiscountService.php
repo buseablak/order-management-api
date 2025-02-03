@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Discount;
 
 use App\DiscountInterface;
 use App\Models\OrderItem;

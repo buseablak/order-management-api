@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\DiscountController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Discount\DiscountController;
+use App\Http\Controllers\Order\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/create_order', [OrderController::class,'store']);
