@@ -2,33 +2,27 @@
 
 namespace App\Services\Discount;
 
-use App\Services\Discount\Buy5Get1FreeService;
-use App\Services\Discount\TenPercentDiscountService;
-use App\Services\Discount\TwentyPercentDiscountService;
+use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 
 class DiscountService
 {
 
-    protected $tenPercentDiscountService;
-    protected $buy5Get1FreeService;
-    protected $twentyPercentDiscountService;
+  protected array $discountApplyServices;
 
-    function __construct(TenPercentDiscountService $tenPercentDiscountService,Buy5Get1FreeService $buy5Get1FreeService,TwentyPercentDiscountService $twentyPercentDiscountService)
+    function __construct(array $discountApplyServices)
     {
-        $this->tenPercentDiscountService = $tenPercentDiscountService;
-        $this->buy5Get1FreeService = $buy5Get1FreeService;
-        $this->twentyPercentDiscountService = $twentyPercentDiscountService;
+        $this->discountApplyServices = $discountApplyServices;
     }
 
     public function calculateDiscountByOrder($id)
     {
         try {
-            $tenPercentDiscount = $this->tenPercentDiscountService->applyDiscount($id);
-            $buy5Get1Free = $this->buy5Get1FreeService->applyDiscount($id);
-            $twentyPercentDiscount = $this->twentyPercentDiscountService->applyDiscount($id);
-
-            $allDiscounts = array_merge($tenPercentDiscount, $buy5Get1Free, $twentyPercentDiscount);
+        $allDiscounts = [];
+            foreach ($this->discountApplyServices as $discountApplyService) {
+                $discount = $discountApplyService->applyDiscount($id);
+                $allDiscounts = array_merge($allDiscounts, $discount);
+            }
             
             if (empty($allDiscounts)) {
                 return [
@@ -38,9 +32,10 @@ class DiscountService
                     'discountedTotal' => 0
                 ];
             }
+            $order = Order::findOrFail($id);
 
             $totalDiscount = array_sum(array_column($allDiscounts, 'discountAmount'));
-            $discountedTotal = $tenPercentDiscount[0]['subtotal'] - $totalDiscount;
+            $discountedTotal = $order->total_price - $totalDiscount;
             
             return [
                 'orderId' => $id,
